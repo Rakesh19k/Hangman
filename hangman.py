@@ -2,9 +2,6 @@ import string
 from words import choose_word
 from images import IMAGES
 
-
-
-
 def get_hint(secret_word, letters_guessed):
     import random
     letters_not_guessed=[]
@@ -15,9 +12,7 @@ def get_hint(secret_word, letters_guessed):
             if letter not in letters_not_guessed:
                 letters_not_guessed.append(letter)
         index+=1
-
     return random.choice(letters_not_guessed)
-
 
 def is_word_guessed(secret_word, letters_guessed):
     if secret_word == get_guessed_word(secret_word, letters_guessed):
@@ -33,17 +28,13 @@ def get_guessed_word(secret_word, letters_guessed):
         else:
             guessed_word+="_"
         index+=1
-
     return guessed_word
-
 
 def  get_available_letters(letters_guessed):
     import string
     letters_left=string.ascii_lowercase
-
     for i in letters_guessed:
         letters_left = letters_left.replace(i,"")
-
     return  letters_left
 
 def ifValid(user_input):
@@ -53,13 +44,10 @@ def ifValid(user_input):
         return False
     return True
 
-
 def hangman(secret_word):
-   
     print ("Welcome to the game, Hangman!")
     print ("I am thinking of a word that is " + str(len(secret_word)) + " letters long.")
     print ("")
-
     print("aap abhi kitni difficulty pe yeh game khelna chahte hai:\n(a)  Easy \n(b)  Medium \n(c)  Hard \n")
 
     hint=0
@@ -80,18 +68,14 @@ def hangman(secret_word):
         elif user_difficulty_choice=="c":
             total_lives=remaining_lives=4
             images=[1,3,5,7]
-
     while (remaining_lives>0):
         available_letters = get_available_letters(letters_guessed)
         print ("Available letters: " + available_letters)
-
         guess = input("Please guess a letter: ")
         letter = guess.lower()
-        
         if (not ifValid(letter) and letter!="hint"):
             print ("invalid input")
             continue
-
         if hint==0:
             if letter == "hint":
                 p=get_hint(secret_word, letters_guessed)
@@ -102,8 +86,6 @@ def hangman(secret_word):
             print ("you have all ready use hint !")
             print ("you can't use hint option !")
             print ("if you will use hint option, your one live will go !")
-
-
         if letter in secret_word:
             letters_guessed.append(letter)
             print ("Good guess: " + get_guessed_word(secret_word, letters_guessed))
@@ -112,7 +94,6 @@ def hangman(secret_word):
                 print (" * * Congratulations, you won! * * ")
                 print ("")
                 break
-
         else:
             print ("Oops! That letter is not in my word: " + get_guessed_word(secret_word, letters_guessed))
             print (IMAGES[images[total_lives-remaining_lives]])
@@ -120,7 +101,6 @@ def hangman(secret_word):
             print ("")
             letters_guessed.append(letter)
             remaining_lives-=1
-
     else:
         print ("sorry you lose the game, the word was - " + str(secret_word))
 secret_word=choose_word()
