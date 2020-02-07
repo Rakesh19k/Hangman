@@ -100,7 +100,7 @@ def hangman(secret_word):
                 continue
         else:
             print ("you have all ready use hint !")
-            print ("you can't you hint option !")
+            print ("you can't use hint option !")
             print ("if you will use hint option, your one live will go !")
 
 
